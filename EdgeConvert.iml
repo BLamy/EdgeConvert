@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.bluecatcode.junit:junit-4.10-extended:1.0.1" level="project" />
+    <orderEntry type="library" name="com.bluecatcode.mockito:mockito-1.10.19-extended:1.0.2" level="project" />
   </component>
 </module>
