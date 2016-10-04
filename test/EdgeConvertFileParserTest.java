@@ -1,6 +1,8 @@
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 /**
@@ -10,26 +12,14 @@ public class EdgeConvertFileParserTest extends TestCase {
 
     @Test
     public void testParseEdgeFile() throws Exception {
-
+        EdgeConvertFileParser parser = new EdgeConvertFileParser(new File("Courses.edg"));
+        assertEquals("Should properly open Courses file", parser.getEdgeFields().length, 7);
     }
 
-    @Test
-    public void testParseSaveFile() throws Exception {
-
-    }
-
-    @Test
-    public void testGetEdgeTables() throws Exception {
-
-    }
-
-    @Test
-    public void testGetEdgeFields() throws Exception {
-
-    }
-
-    @Test
-    public void testOpenFile() throws Exception {
-
-    }
+//    @Test
+//    public void testParseSaveFile() throws Exception { // TODO saveFile is completely broken.
+////        EdgeConvertFileParser parser = new EdgeConvertFileParser(new File("Courses.edg"));
+////        parser.parseSaveFile();
+////        assertEquals("Should properly open Courses file", parser.getEdgeFields().length, 7);
+//    }
 }

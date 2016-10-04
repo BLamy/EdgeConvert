@@ -8,7 +8,6 @@ public class AllTests {
         //$JUnit-BEGIN$
         suite.addTestSuite(CreateDDLMySQLTest.class);
         suite.addTestSuite(EdgeConnectorTest.class);
-        suite.addTestSuite(EdgeConvertCreateDDLTest.class);
         suite.addTestSuite(EdgeConvertFileParserTest.class);
         suite.addTestSuite(EdgeFieldTest.class);
         suite.addTestSuite(EdgeTableTest.class);
