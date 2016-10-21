@@ -1,3 +1,5 @@
+package group1;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

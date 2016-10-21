@@ -2,16 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <modelVersion>4.0.0</modelVersion>
 
-<groupId>com.group1</groupId>
+<groupId>org.group1</groupId>
 <artifactId>EdgeConvert</artifactId>
 <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
 <name>EdgeConvert</name>
-
-<properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>4.8.1</junit.version>
-</properties>
 
 <dependencies>
     <dependency>

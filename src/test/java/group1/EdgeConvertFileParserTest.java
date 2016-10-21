@@ -1,9 +1,9 @@
+package group1;
+
 import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.File;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by brett on 9/30/16.

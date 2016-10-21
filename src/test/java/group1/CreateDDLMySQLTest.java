@@ -1,9 +1,8 @@
+package group1;
+
 import junit.framework.TestCase;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by brett on 9/30/16.
