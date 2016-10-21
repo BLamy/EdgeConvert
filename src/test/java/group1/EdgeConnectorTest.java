@@ -16,7 +16,7 @@ public class EdgeConnectorTest extends TestCase {
 
 	@Test
 	public void testGetNumConnector() {
-		assertEquals("numConnector was intialized to 1 so it should be 1",2,testObj.getNumConnector());
+		assertEquals("numConnector was intialized to 1 so it should be 1",1,testObj.getNumConnector());
 	}
 
 	@Test
