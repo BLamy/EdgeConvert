@@ -76,7 +76,7 @@ public class EdgeConvertGUI {
       edgeWindowListener = new EdgeWindowListener();
       createDDLListener = new CreateDDLButtonListener();
       this.showGUI();
-   } // EdgeConvertGUI.EdgeConvertGUI()
+   }
 
    public void showGUI() {
       try {
@@ -86,7 +86,7 @@ public class EdgeConvertGUI {
       }
       createDTScreen();
       createDRScreen();
-   } //showGUI()
+   }
 
    public void createDTScreen() {//create Define Tables screen
       jfDT = new JFrame(DEFINE_TABLES);
@@ -152,7 +152,7 @@ public class EdgeConvertGUI {
       jfcEdge = new JFileChooser();
       jfcOutputDir = new JFileChooser();
 	   effEdge = new ExampleFileFilter("edg", "Edge Diagrammer Files");
-   	effSave = new ExampleFileFilter("sav", "Edge Convert Save Files");
+   	  effSave = new ExampleFileFilter("sav", "Edge Convert Save Files");
       jfcOutputDir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
       jpDTBottom = new JPanel(new GridLayout(1, 2));

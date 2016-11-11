@@ -2,23 +2,17 @@ package group1;
 
 public abstract class EdgeConvertCreateDDL {
 
-   static String[] products = {"MySQL"};
    protected EdgeTable[] tables; //master copy of EdgeTable objects
    protected EdgeField[] fields; //master copy of EdgeField objects
    protected int[] numBoundTables;
    protected int maxBound;
    protected StringBuffer sb;
-   protected int selected;
 
    public EdgeConvertCreateDDL(EdgeTable[] tables, EdgeField[] fields) {
       this.tables = tables;
       this.fields = fields;
       initialize();
-   } //EdgeConvertCreateDDL(EdgeTable[], EdgeField[])
-
-   public EdgeConvertCreateDDL() { //default constructor with empty arg list for to allow output dir to be set before there are table and field objects
-
-   } //EdgeConvertCreateDDL()
+   }
 
    public void initialize() {
       numBoundTables = new int[tables.length];
@@ -66,4 +60,4 @@ public abstract class EdgeConvertCreateDDL {
 
    public abstract void createDDL();
 
-}//EdgeConvertCreateDDL
+}
