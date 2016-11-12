@@ -21,10 +21,9 @@ public class EdgeTableTest extends TestCase {
         edgeTable.addRelatedTable(0);
         edgeTable.addRelatedTable(1);
         edgeTable.addRelatedTable(2);
-        edgeTable.makeArrays();
-        assertEquals("Should properly set testRelatedTable[1]", 0, edgeTable.getRelatedTablesArray()[0]);
+        assertEquals("Should properly set testRelatedTable[0]", 0, edgeTable.getRelatedTablesArray()[0]);
         assertEquals("Should properly set testRelatedTable[1]", 1, edgeTable.getRelatedTablesArray()[1]);
-        assertEquals("Should properly set testRelatedTable[1]", 2, edgeTable.getRelatedTablesArray()[2]);
+        assertEquals("Should properly set testRelatedTable[2]", 2, edgeTable.getRelatedTablesArray()[2]);
     }
 
     @Test
@@ -33,10 +32,9 @@ public class EdgeTableTest extends TestCase {
         edgeTable.addNativeField(0);
         edgeTable.addNativeField(1);
         edgeTable.addNativeField(2);
-        edgeTable.makeArrays();
-        assertEquals("Should properly set setGetRelatedFields[1]", 0, edgeTable.getNativeFieldsArray()[0]);
+        assertEquals("Should properly set setGetRelatedFields[0]", 0, edgeTable.getNativeFieldsArray()[0]);
         assertEquals("Should properly set setGetRelatedFields[1]", 1, edgeTable.getNativeFieldsArray()[1]);
-        assertEquals("Should properly set setGetRelatedFields[1]", 2, edgeTable.getNativeFieldsArray()[2]);
+        assertEquals("Should properly set setGetRelatedFields[2]", 2, edgeTable.getNativeFieldsArray()[2]);
     }
 
     @Test
@@ -45,13 +43,12 @@ public class EdgeTableTest extends TestCase {
         edgeTable.addNativeField(0);
         edgeTable.addNativeField(1);
         edgeTable.addNativeField(2);
-        edgeTable.makeArrays();
         edgeTable.setRelatedField(1, 1);
         edgeTable.setRelatedField(2, 2);
         edgeTable.moveFieldUp(2);
-        assertEquals("Should properly set setGetRelatedFields[1]", 0, edgeTable.getRelatedFieldsArray()[0]);
+        assertEquals("Should properly set setGetRelatedFields[0]", 0, edgeTable.getRelatedFieldsArray()[0]);
         assertEquals("Should properly set setGetRelatedFields[1]", 2, edgeTable.getRelatedFieldsArray()[1]);
-        assertEquals("Should properly set setGetRelatedFields[1]", 1, edgeTable.getRelatedFieldsArray()[2]);
+        assertEquals("Should properly set setGetRelatedFields[2]", 1, edgeTable.getRelatedFieldsArray()[2]);
     }
 
     @Test
@@ -60,13 +57,12 @@ public class EdgeTableTest extends TestCase {
         edgeTable.addNativeField(0);
         edgeTable.addNativeField(1);
         edgeTable.addNativeField(2);
-        edgeTable.makeArrays();
         edgeTable.setRelatedField(1, 1);
         edgeTable.setRelatedField(2, 2);
         edgeTable.moveFieldDown(1);
-        assertEquals("Should properly set setGetRelatedFields[1]", 0, edgeTable.getRelatedFieldsArray()[0]);
+        assertEquals("Should properly set setGetRelatedFields[0]", 0, edgeTable.getRelatedFieldsArray()[0]);
         assertEquals("Should properly set setGetRelatedFields[1]", 2, edgeTable.getRelatedFieldsArray()[1]);
-        assertEquals("Should properly set setGetRelatedFields[1]", 1, edgeTable.getRelatedFieldsArray()[2]);
+        assertEquals("Should properly set setGetRelatedFields[2]", 1, edgeTable.getRelatedFieldsArray()[2]);
     }
 
     @Test
@@ -77,7 +73,6 @@ public class EdgeTableTest extends TestCase {
         edgeTable.addNativeField(0);
         edgeTable.addNativeField(1);
         edgeTable.addNativeField(2);
-        edgeTable.makeArrays();
         String expected = (
             "Table:1" +
                 "{" +
