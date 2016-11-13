@@ -29,7 +29,6 @@ public class EdgeConvertGUI {
    EdgeWindowListener edgeWindowListener;
    CreateDDLButtonListener createDDLListener;
    private EdgeConvertFileParser ecfp;
-   private EdgeConvertCreateDDL eccd;
    private static PrintWriter pw;
    private EdgeTable[] tables; //master copy of EdgeTable objects
    private EdgeField[] fields; //master copy of EdgeField objects
