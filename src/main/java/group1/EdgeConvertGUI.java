@@ -1,6 +1,9 @@
 package group1;
 
 
+import group1.model.*;
+import group1.model.Field;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -30,10 +33,10 @@ public class EdgeConvertGUI {
    CreateDDLButtonListener createDDLListener;
    private EdgeConvertFileParser ecfp;
    private static PrintWriter pw;
-   private EdgeTable[] tables; //master copy of EdgeTable objects
-   private EdgeField[] fields; //master copy of EdgeField objects
-   private EdgeTable currentDTTable, currentDRTable1, currentDRTable2; //pointers to currently selected table(s) on Define Tables (DT) and Define Relations (DR) screens
-   private EdgeField currentDTField, currentDRField1, currentDRField2; //pointers to currently selected field(s) on Define Tables (DT) and Define Relations (DR) screens
+   private Table[] tables; //master copy of Table objects
+   private Field[] fields; //master copy of Field objects
+   private Table currentDTTable, currentDRTable1, currentDRTable2; //pointers to currently selected table(s) on Define Tables (DT) and Define Relations (DR) screens
+   private Field currentDTField, currentDRField1, currentDRField2; //pointers to currently selected field(s) on Define Tables (DT) and Define Relations (DR) screens
    private static boolean readSuccess = true; //this tells GUI whether to populate JList components or not
    private boolean dataSaved = true;
    private ArrayList alSubclasses, alProductNames;
@@ -295,7 +298,7 @@ public class EdgeConvertGUI {
       jpDTCenter.add(jpDTCenter2);
       jpDTCenter.add(jpDTCenterRight);
 
-      strDataType = EdgeField.getStrDataType(); //get the list of currently supported data types
+      strDataType = Field.getStrDataType(); //get the list of currently supported data types
       jrbDataType = new JRadioButton[strDataType.length]; //create array of JRadioButtons, one for each supported data type
       bgDTDataType = new ButtonGroup();
       jpDTCenterRight1 = new JPanel(new GridLayout(strDataType.length, 1));
@@ -435,7 +438,7 @@ public class EdgeConvertGUI {
                try {
                   if (result.length() > 5) {
                      JOptionPane.showMessageDialog(null, "Varchar length must be greater than 0 and less than or equal to 65535.");
-                     jtfDTVarchar.setText(Integer.toString(EdgeField.VARCHAR_DEFAULT_LENGTH));
+                     jtfDTVarchar.setText(Integer.toString(Field.VARCHAR_DEFAULT_LENGTH));
                      return;
                   }
                   varchar = Integer.parseInt(result);
@@ -444,12 +447,12 @@ public class EdgeConvertGUI {
                      currentDTField.setVarcharValue(varchar);
                   } else {
                      JOptionPane.showMessageDialog(null, "Varchar length must be greater than 0 and less than or equal to 65535.");
-                     jtfDTVarchar.setText(Integer.toString(EdgeField.VARCHAR_DEFAULT_LENGTH));
+                     jtfDTVarchar.setText(Integer.toString(Field.VARCHAR_DEFAULT_LENGTH));
                      return;
                   }
                } catch (NumberFormatException nfe) {
                   JOptionPane.showMessageDialog(null, "\"" + result + "\" is not a number");
-                  jtfDTVarchar.setText(Integer.toString(EdgeField.VARCHAR_DEFAULT_LENGTH));
+                  jtfDTVarchar.setText(Integer.toString(group1.model.Field.VARCHAR_DEFAULT_LENGTH));
                   return;
                }
                dataSaved = false;
@@ -964,7 +967,7 @@ public class EdgeConvertGUI {
    private void getOutputClasses() {
       File[] resultFiles;
       Class resultClass = null;
-      Class[] paramTypes = {EdgeTable[].class, EdgeField[].class};
+      Class[] paramTypes = {Table[].class, Field[].class};
       Class[] paramTypesNull = {};
       Constructor conResultClass;
       Object[] args = {tables, fields};
@@ -1092,7 +1095,7 @@ public class EdgeConvertGUI {
             }
          }
          if (jrbDataType[0].isSelected()) {
-            jtfDTVarchar.setText(Integer.toString(EdgeField.VARCHAR_DEFAULT_LENGTH));
+            jtfDTVarchar.setText(Integer.toString(Field.VARCHAR_DEFAULT_LENGTH));
             jbDTVarchar.setEnabled(true);
          } else {
             jtfDTVarchar.setText("");
@@ -1146,7 +1149,7 @@ public class EdgeConvertGUI {
             JOptionPane.showMessageDialog(null, "You have not selected a path that contains valid output definition files yet.\nPlease select a path now.");
             setOutputDir();
          }
-         getOutputClasses(); //in case outputDir was set before a file was loaded and EdgeTable/EdgeField objects created
+         getOutputClasses(); //in case outputDir was set before a file was loaded and Table/Field objects created
          sqlString = getSQLStatements();
          if (sqlString.equals(EdgeConvertGUI.CANCELLED)) {
             return;

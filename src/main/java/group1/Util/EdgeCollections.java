@@ -4,15 +4,15 @@ package group1.Util;
  * Created by brett on 11/12/16.
  */
 
-import group1.EdgeField;
-import group1.EdgeTable;
+import group1.model.Field;
+import group1.model.Table;
 
 import java.util.ArrayList;
 
 public class EdgeCollections {
-    public static EdgeTable findTableByNumFig(EdgeTable[] tables, int numFigure) {
+    public static Table findTableByNumFig(Table[] tables, int numFigure) {
         // TODO replace with find Higher order function?
-        for (EdgeTable table : tables) {
+        for (Table table : tables) {
             if (numFigure == table.getNumFigure()) {
                 return table;
             }
@@ -20,14 +20,14 @@ public class EdgeCollections {
         return null;
     }
 
-    public static String findTableNameByNumFig(EdgeTable[] tables, int numFigure) {
-        EdgeTable table = findTableByNumFig(tables, numFigure);
+    public static String findTableNameByNumFig(Table[] tables, int numFigure) {
+        Table table = findTableByNumFig(tables, numFigure);
         return (table == null) ? "" : table.getName();
     }
 
-    public static EdgeField findFieldByNumFig(EdgeField[] fields, int numFigure) {
+    public static Field findFieldByNumFig(Field[] fields, int numFigure) {
         // TODO replace with find Higher order function?
-        for (EdgeField field : fields) {
+        for (Field field : fields) {
             if (numFigure == field.getNumFigure()) {
                 return field;
             }
@@ -35,15 +35,15 @@ public class EdgeCollections {
         return null;
     }
 
-    public static String findFieldNameByNumFig(EdgeField[] fields, int numFigure) {
-        EdgeField field = findFieldByNumFig(fields, numFigure);
+    public static String findFieldNameByNumFig(Field[] fields, int numFigure) {
+        Field field = findFieldByNumFig(fields, numFigure);
         return (field == null) ? "" : field.getName();
     }
 
-    public static int getNumPrimaryKey(EdgeTable table, EdgeField[] fields) {
+    public static int getNumPrimaryKey(Table table, Field[] fields) {
         int numPrimaryKey = 0;
         for (int nativeField : table.getNativeFieldsArray()) {
-            EdgeField currentField = findFieldByNumFig(fields, nativeField);
+            Field currentField = findFieldByNumFig(fields, nativeField);
             if (currentField != null && currentField.getIsPrimaryKey()) {
                 numPrimaryKey++;
             }
@@ -51,10 +51,10 @@ public class EdgeCollections {
         return numPrimaryKey;
     }
 
-    public static int getNumForeignKey(EdgeTable table, EdgeField[] fields) {
+    public static int getNumForeignKey(Table table, Field[] fields) {
         int numForeignKey = 0;
         for (int nativeField : table.getNativeFieldsArray()) {
-            EdgeField currentField = findFieldByNumFig(fields, nativeField);
+            Field currentField = findFieldByNumFig(fields, nativeField);
             if (currentField != null && currentField.getFieldBound() != 0) {
                 numForeignKey++;
             }
@@ -62,17 +62,17 @@ public class EdgeCollections {
         return numForeignKey;
     }
 
-    public static boolean[] getPrimaryKeys(EdgeTable table, EdgeField[] fields) {
+    public static boolean[] getPrimaryKeys(Table table, Field[] fields) {
         int[] nativeFields = table.getNativeFieldsArray();
         boolean[] primaryKey = new boolean[nativeFields.length];
         for (int i = 0; i < nativeFields.length; i++) {
-            EdgeField currentField = findFieldByNumFig(fields, nativeFields[i]);
+            Field currentField = findFieldByNumFig(fields, nativeFields[i]);
             primaryKey[i] = currentField != null && currentField.getIsPrimaryKey();
         }
         return primaryKey;
     }
 
-    public static EdgeTable[] sortTables(EdgeTable[] tables) {
+    public static Table[] sortTables(Table[] tables) {
         int[] numBoundTables = new int[tables.length];
         int maxBound = 0;
         for (int i = 0; i < tables.length; i++) { //step through list of tables
@@ -89,7 +89,7 @@ public class EdgeCollections {
             }
         }
 
-        ArrayList<EdgeTable> orderedTables = new ArrayList<EdgeTable>();
+        ArrayList<Table> orderedTables = new ArrayList<Table>();
         for (int boundCount = 0; boundCount <= maxBound; boundCount++) { //process tables in order from least dependent (least number of bound tables) to most dependent
             for (int tableCount = 0; tableCount < numBoundTables.length; tableCount++) { //step through list of tables
                 if (numBoundTables[tableCount] == boundCount) { //
@@ -97,6 +97,6 @@ public class EdgeCollections {
                 }
             }
         }
-        return orderedTables.toArray(new EdgeTable[orderedTables.size()]);
+        return orderedTables.toArray(new Table[orderedTables.size()]);
     }
 }

@@ -1,17 +1,19 @@
 package group1;
 
-import group1.Strategies.MySQL;
+import group1.Outputs.MySQL;
+import group1.model.Field;
+import group1.model.Table;
 
 import javax.swing.*;
 
 public class CreateDDLMySQL {
 
-    protected EdgeTable[] tables; //master copy of EdgeTable objects
-    protected EdgeField[] fields; //master copy of EdgeField objects
+    protected Table[] tables; //master copy of Table objects
+    protected Field[] fields; //master copy of Field objects
     protected String databaseName;
     protected StringBuffer sb;
 
-    public CreateDDLMySQL(EdgeTable[] tables, EdgeField[] fields) {
+    public CreateDDLMySQL(Table[] tables, Field[] fields) {
         this.tables = tables;
         this.fields = fields;
         this.sb = new StringBuffer();

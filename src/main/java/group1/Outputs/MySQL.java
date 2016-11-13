@@ -1,7 +1,7 @@
-package group1.Strategies;
+package group1.Outputs;
 
-import group1.EdgeField;
-import group1.EdgeTable;
+import group1.model.Field;
+import group1.model.Table;
 import group1.Util.EdgeCollections;
 
 /**
@@ -25,11 +25,11 @@ public class MySQL {
         return "USE " + dbName + ";\r\n";
     }
 
-    private static String createTable(EdgeTable table, EdgeField[] fields) {
+    private static String createTable(Table table, Field[] fields) {
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE " + table.getName() + " (\r\n");
         for (int nativeField : table.getNativeFieldsArray()) { //print out the fields
-            EdgeField currentField = EdgeCollections.findFieldByNumFig(fields, nativeField);
+            Field currentField = EdgeCollections.findFieldByNumFig(fields, nativeField);
             sb.append("\t" + currentField.getName() + " " + strDataType[currentField.getDataType()]);
             if (currentField.getDataType() == 0) { //varchar
                 sb.append("(" + currentField.getVarcharValue() + ")"); //append varchar length in () if data type is varchar
@@ -49,7 +49,7 @@ public class MySQL {
         return sb.toString();
     }
 
-    private static String addPrimaryKeys(EdgeTable table, EdgeField[] fields) {
+    private static String addPrimaryKeys(Table table, Field[] fields) {
         int numPrimaryKey = EdgeCollections.getNumPrimaryKey(table, fields);
         int numForeignKey = EdgeCollections.getNumForeignKey(table, fields);
         boolean[] primaryKey = EdgeCollections.getPrimaryKeys(table, fields);
@@ -75,7 +75,7 @@ public class MySQL {
         return sb.toString();
     }
 
-    private static String addForeignKeys(EdgeTable table, EdgeField[] fields, EdgeTable[] tables) {
+    private static String addForeignKeys(Table table, Field[] fields, Table[] tables) {
         int numForeignKey = EdgeCollections.getNumForeignKey(table, fields);
         if (numForeignKey <= 0) return "";
 
@@ -84,7 +84,7 @@ public class MySQL {
         int[] relatedFields = table.getRelatedFieldsArray();
         int[] nativeFields = table.getNativeFieldsArray();
         for (int i = 0; i < relatedFields.length; i++) {
-            EdgeField nativeField = EdgeCollections.findFieldByNumFig(fields, nativeFields[i]);
+            Field nativeField = EdgeCollections.findFieldByNumFig(fields, nativeFields[i]);
             if (relatedFields[i] == 0 || nativeField == null) continue;
             String fkName = nativeField.getName();
             String boundTableName = EdgeCollections.findTableNameByNumFig(tables, nativeField.getTableBound());
@@ -102,12 +102,12 @@ public class MySQL {
         return sb.toString();
     }
 
-    public static String convert(String databaseName, EdgeTable[] tables, EdgeField[] fields) {
+    public static String convert(String databaseName, Table[] tables, Field[] fields) {
         StringBuffer sb = new StringBuffer();
 
         sb.append(createDatabase(databaseName));
         sb.append(useDatabase(databaseName));
-        for (EdgeTable table : EdgeCollections.sortTables(tables)) {
+        for (Table table : EdgeCollections.sortTables(tables)) {
             sb.append(createTable(table, fields));
             sb.append(addPrimaryKeys(table, fields));
             sb.append(addForeignKeys(table, fields, tables));

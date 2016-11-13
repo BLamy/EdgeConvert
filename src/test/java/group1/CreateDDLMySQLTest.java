@@ -1,5 +1,7 @@
 package group1;
 
+import group1.model.Field;
+import group1.model.Table;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.mockito.*;
@@ -18,45 +20,45 @@ public class CreateDDLMySQLTest extends TestCase {
 
     @Test
     public void testCreateDDL() throws Exception {
-        EdgeTable usersTable = new EdgeTable("0|users");
+        Table usersTable = new Table("0|users");
         usersTable.addRelatedTable(1);
         usersTable.addNativeField(0);
         usersTable.addNativeField(1);
         usersTable.addNativeField(2);
         usersTable.makeArrays();
 
-        EdgeField userId = new EdgeField("1|ID"); // TODO: BUG no way to create a FK where the to field is 0
+        Field userId = new Field("1|ID"); // TODO: BUG no way to create a FK where the to field is 0
         userId.setTableID(0);
         userId.setDisallowNull(true);
         userId.setIsPrimaryKey(true);
         userId.setDataType(INT);
 
-        EdgeField username = new EdgeField("0|username");
+        Field username = new Field("0|username");
         username.setTableID(0);
         username.setDisallowNull(true);
         username.setIsPrimaryKey(true);
         username.setVarcharValue(255);
         username.setDataType(VARCHAR);
 
-        EdgeField password = new EdgeField("2|password");
+        Field password = new Field("2|password");
         password.setTableID(0);
         password.setDisallowNull(true);
         password.setVarcharValue(255);
         password.setDataType(VARCHAR);
 
-        EdgeField isVerified = new EdgeField("3|isVerified");
+        Field isVerified = new Field("3|isVerified");
         isVerified.setTableID(0);
         isVerified.setDisallowNull(true);
         isVerified.setDataType(BOOL);
         isVerified.setDefaultValue("false");
 
-        EdgeField canSendMessages = new EdgeField("4|canSendMessages");
+        Field canSendMessages = new Field("4|canSendMessages");
         canSendMessages.setTableID(0);
         canSendMessages.setDisallowNull(true);
         canSendMessages.setDataType(BOOL);
         canSendMessages.setDefaultValue("true");
 
-        EdgeTable messagesTable = new EdgeTable("1|messages");
+        Table messagesTable = new Table("1|messages");
         messagesTable.addRelatedTable(0);
         messagesTable.addNativeField(3);
         messagesTable.addNativeField(4);
@@ -66,27 +68,27 @@ public class CreateDDLMySQLTest extends TestCase {
         messagesTable.setRelatedField(1, 1);
         messagesTable.setRelatedField(2, 1);
 
-        EdgeField messageId = new EdgeField("5|ID");
+        Field messageId = new Field("5|ID");
         messageId.setTableID(1);
         messageId.setDisallowNull(true);
         messageId.setIsPrimaryKey(true);
         messageId.setDataType(INT);
 
-        EdgeField toUser = new EdgeField("6|toUser");
+        Field toUser = new Field("6|toUser");
         toUser.setTableID(1);
         toUser.setTableBound(0);
         toUser.setFieldBound(1);
         toUser.setDisallowNull(true);
         toUser.setDataType(INT);
 
-        EdgeField fromUser = new EdgeField("7|fromUser");
+        Field fromUser = new Field("7|fromUser");
         fromUser.setTableID(1);
         fromUser.setTableBound(0);
         fromUser.setFieldBound(2);
         fromUser.setDisallowNull(true);
         fromUser.setDataType(INT);
 
-        EdgeField message = new EdgeField("8|message");
+        Field message = new Field("8|message");
         message.setTableID(1);
         message.setDisallowNull(true);
         message.setDefaultValue("Sent from EdgeConnector");
@@ -94,8 +96,8 @@ public class CreateDDLMySQLTest extends TestCase {
         message.setDataType(VARCHAR);
 
         CreateDDLMySQL spy = Mockito.spy(new CreateDDLMySQL(
-                new EdgeTable[] { usersTable, messagesTable },
-                new EdgeField[] {
+                new Table[] { usersTable, messagesTable },
+                new Field[] {
                         userId, isVerified, canSendMessages, username, password,
                         messageId, toUser, fromUser, message
                 }

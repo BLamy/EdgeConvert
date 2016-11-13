@@ -1,8 +1,8 @@
 package group1;
 
+import group1.model.Field;
 import junit.framework.TestCase;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.io.File;
 
@@ -41,7 +41,7 @@ public class EdgeConvertFileParserTest extends TestCase {
     }
     @Test
     public void testFieldNames() throws Exception {
-        EdgeField[] fields = parser.getEdgeFields();
+        Field[] fields = parser.getEdgeFields();
         assertEquals("Should be 7 fields", fields.length, 7);
         assertEquals("First Field", fields[0].toString(), "3|Grade|13|0|0|0|1|false|false|");
         assertEquals("Second Field", fields[1].toString(), "4|CourseName|0|0|0|0|1|false|false|");

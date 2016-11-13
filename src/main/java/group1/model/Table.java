@@ -1,14 +1,16 @@
-package group1;
+package group1.model;
+
+import group1.EdgeConvertFileParser;
 
 import java.util.*;
 
-public class EdgeTable {
+public class Table {
    private int numFigure;
    private String name;
    private ArrayList<Integer> alRelatedTables, alNativeFields;
     private HashMap<Integer, Integer> alRelatedFields;
 
-   public EdgeTable(String inputString) {
+   public Table(String inputString) {
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
