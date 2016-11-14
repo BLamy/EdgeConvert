@@ -1,6 +1,5 @@
 package group1.model;
 
-import com.sun.tools.internal.jxc.ap.Const;
 import group1.Util.Constants;
 import junit.framework.TestCase;
 import org.junit.Test;
