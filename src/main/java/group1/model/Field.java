@@ -1,16 +1,18 @@
-package group1;
+package group1.model;
+
+import group1.Util.Constants;
 
 import java.util.StringTokenizer;
 
-public class EdgeField {
+public class Field {
    private int numFigure, tableID, tableBound, fieldBound, dataType, varcharValue;
    private String name, defaultValue;
    private boolean disallowNull, isPrimaryKey;
    private static String[] strDataType = {"Varchar", "Boolean", "Integer", "Double"};
    public static final int VARCHAR_DEFAULT_LENGTH = 1;
 
-   public EdgeField(String inputString) {
-      StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
+   public Field(String inputString) {
+      StringTokenizer st = new StringTokenizer(inputString, Constants.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
       tableID = 0;
@@ -103,15 +105,10 @@ public class EdgeField {
    }
 
    public String toString() {
-      return numFigure + EdgeConvertFileParser.DELIM +
-      name + EdgeConvertFileParser.DELIM +
-      tableID + EdgeConvertFileParser.DELIM +
-      tableBound + EdgeConvertFileParser.DELIM +
-      fieldBound + EdgeConvertFileParser.DELIM +
-      dataType + EdgeConvertFileParser.DELIM +
-      varcharValue + EdgeConvertFileParser.DELIM +
-      isPrimaryKey + EdgeConvertFileParser.DELIM +
-      disallowNull + EdgeConvertFileParser.DELIM +
-      defaultValue;
+      return String.join(Constants.DELIM, new String[]{
+         numFigure+"", name, tableID+"", tableBound+"", fieldBound+"",
+         dataType+"", varcharValue+"", isPrimaryKey+"", disallowNull+"",
+         defaultValue
+      });
    }
 }
