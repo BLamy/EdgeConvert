@@ -2,7 +2,7 @@ package group1;
 
 
 import group1.Inputs.FileParser;
-import group1.Outputs.MySQL;
+import group1.Outputs.MySQLStrategy;
 import group1.Util.*;
 import group1.Util.FileFilter;
 import group1.model.*;
@@ -967,7 +967,7 @@ public class EdgeConvertGUI {
 
     public String getSQLString(String getDatabaseName) {
         EdgeConvertGUI.setReadSuccess(true);
-        return MySQL.convert(getDatabaseName, tables, fields);
+        return MySQLStrategy.convert(getDatabaseName, tables, fields);
     }
 
     private String getSQLStatements() {

@@ -1,30 +1,26 @@
-package group1.Outputs;
+package group1.fixtures;
 
+import group1.model.Connector;
+import group1.model.Database;
 import group1.model.Field;
 import group1.model.Table;
-import junit.framework.TestCase;
-import org.junit.Test;
 
 /**
- * Created by brett on 9/30/16.
+ * Created by brett on 11/13/16.
  */
-public class MySQLTest extends TestCase {
+public class FakeDatabase {
     // Field Types
-    private final int VARCHAR = 0;
-    private final int BOOL = 1;
-    private final int INT = 2;
-    private final int DOUBLE = 3;
+    private static final int VARCHAR = 0;
+    private static final int BOOL = 1;
+    private static final int INT = 2;
+    private static final int DOUBLE = 3;
 
-
-
-    @Test
-    public void testCreateDDL() throws Exception {
+    public static Database createFakeDatabase() {
         Table usersTable = new Table("0|users");
         usersTable.addRelatedTable(1);
         usersTable.addNativeField(0);
         usersTable.addNativeField(1);
         usersTable.addNativeField(2);
-        usersTable.makeArrays();
 
         Field userId = new Field("1|ID"); // TODO: BUG no way to create a FK where the to field is 0
         userId.setTableID(0);
@@ -63,7 +59,6 @@ public class MySQLTest extends TestCase {
         messagesTable.addNativeField(4);
         messagesTable.addNativeField(5);
         messagesTable.addNativeField(6);
-        messagesTable.makeArrays();
         messagesTable.setRelatedField(1, 1);
         messagesTable.setRelatedField(2, 1);
 
@@ -94,32 +89,8 @@ public class MySQLTest extends TestCase {
         message.setVarcharValue(255);
         message.setDataType(VARCHAR);
 
-        String dbName = "MySQLDB";
         Table[] tables = new Table[] { usersTable, messagesTable };
         Field[] fields = new Field[] { userId, isVerified, canSendMessages, username, password, messageId, toUser, fromUser, message };
-        String actual = MySQL.convert(dbName, tables, fields).replaceAll("\\s","");
-
-        String expected = (
-            "        CREATE DATABASE MySQLDB;\n" +
-            "        USE MySQLDB;\n" +
-            "        CREATE TABLE users (\n" +
-            "                username VARCHAR(255) NOT NULL,\n" +
-            "                ID INT NOT NULL,\n" +
-            "                password VARCHAR(255) NOT NULL,\n" +
-            "                CONSTRAINT users_PK PRIMARY KEY (username, ID)\n" +
-            "        );\n" +
-            "\n" +
-            "        CREATE TABLE messages (\n" +
-            "                isVerified BOOL NOT NULL DEFAULT 0,\n" +
-            "                canSendMessages BOOL NOT NULL DEFAULT 1,\n" +
-            "                ID INT NOT NULL,\n" +
-            "                toUser INT NOT NULL,\n" +
-            "                CONSTRAINT messages_PK PRIMARY KEY (ID),\n" +
-            "                CONSTRAINT messages_FK1 FOREIGN KEY(canSendMessages) REFERENCES users(ID)CONSTRAINT messages_FK2 FOREIGN KEY(ID) REFERENCES users(ID)\n" +
-            "        );"
-            ).replaceAll("\\s","");
-
-        assertEquals("", actual, expected);
+        return new Database(tables, fields, new Connector[]{});
     }
-
 }

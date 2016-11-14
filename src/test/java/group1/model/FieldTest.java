@@ -1,5 +1,6 @@
 package group1.model;
 
+import com.sun.tools.internal.jxc.ap.Const;
 import group1.Util.Constants;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -42,23 +43,11 @@ public class FieldTest extends TestCase {
         field.setTableID(8);
         field.setTableBound(8);
         field.setFieldBound(8);
-        field.setDisallowNull(true);
-        field.setIsPrimaryKey(true);
-        field.setDefaultValue("foobar");
-        field.setVarcharValue(4);
         field.setDataType(1);
-        assertEquals(field.toString(),
-                field.getNumFigure() + Constants.DELIM +
-                field.getName() + Constants.DELIM +
-                field.getTableID() + Constants.DELIM +
-                field.getTableBound() + Constants.DELIM +
-                field.getFieldBound() + Constants.DELIM +
-                field.getDataType() + Constants.DELIM +
-                field.getVarcharValue() + Constants.DELIM +
-                field.getIsPrimaryKey() + Constants.DELIM +
-                field.getDisallowNull() + Constants.DELIM +
-                field.getDefaultValue()
-        );
-
+        field.setVarcharValue(4);
+        field.setIsPrimaryKey(true);
+        field.setDisallowNull(true);
+        field.setDefaultValue("foobar");
+        assertEquals(field.toString(), String.join(Constants.DELIM, "1", "brett", "8", "8", "8", "1", "4", "true", "true", "foobar"));
     }
 }

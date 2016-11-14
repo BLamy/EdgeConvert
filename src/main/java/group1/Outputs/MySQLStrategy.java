@@ -7,30 +7,39 @@ import group1.Util.Collections;
 /**
  * Created by brett on 11/12/16.
  */
-public class MySQL {
-    static String[] strDataType = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
+public class MySQLStrategy {
+    static String[] dataTypes = {"VARCHAR", "BOOL", "INT", "DOUBLE"};
 
     /**
-     * MySQL uses '1' and '0' for boolean types
+     * MySQLStrategy uses '1' and '0' for boolean types
      */
     private static int convertStrBooleanToInt(String input) { //
         return input.equals("true") ? 1 : 0;
     }
 
+    /**
+     * Create database named query
+     */
     private static String createDatabase(String dbName) {
         return "CREATE DATABASE " + dbName + ";\r\n";
     }
 
+    /**
+     * Use Database Query
+     */
     private static String useDatabase(String dbName) {
         return "USE " + dbName + ";\r\n";
     }
 
+    /**
+     * Generates Create table Query
+     */
     private static String createTable(Table table, Field[] fields) {
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE " + table.getName() + " (\r\n");
         for (int nativeField : table.getNativeFieldsArray()) { //print out the fields
             Field currentField = Collections.findFieldByNumFig(fields, nativeField);
-            sb.append("\t" + currentField.getName() + " " + strDataType[currentField.getDataType()]);
+            sb.append("\t" + currentField.getName() + " " + dataTypes[currentField.getDataType()]);
             if (currentField.getDataType() == 0) { //varchar
                 sb.append("(" + currentField.getVarcharValue() + ")"); //append varchar length in () if data type is varchar
             }
@@ -49,6 +58,9 @@ public class MySQL {
         return sb.toString();
     }
 
+    /**
+     * Adds Primary keys ot the arguments
+     */
     private static String addPrimaryKeys(Table table, Field[] fields) {
         int numPrimaryKey = Collections.getNumPrimaryKey(table, fields);
         int numForeignKey = Collections.getNumForeignKey(table, fields);
@@ -75,10 +87,12 @@ public class MySQL {
         return sb.toString();
     }
 
+    /**
+     * Adds Foreign keys ot the arguments
+     */
     private static String addForeignKeys(Table table, Field[] fields, Table[] tables) {
         int numForeignKey = Collections.getNumForeignKey(table, fields);
         if (numForeignKey <= 0) return "";
-
         int currentFK = 1;
         StringBuilder sb = new StringBuilder();
         int[] relatedFields = table.getRelatedFieldsArray();
@@ -102,9 +116,11 @@ public class MySQL {
         return sb.toString();
     }
 
+    /**
+     * All outputs must expose this method
+     */
     public static String convert(String databaseName, Table[] tables, Field[] fields) {
         StringBuffer sb = new StringBuffer();
-
         sb.append(createDatabase(databaseName));
         sb.append(useDatabase(databaseName));
         for (Table table : Collections.sortTables(tables)) {

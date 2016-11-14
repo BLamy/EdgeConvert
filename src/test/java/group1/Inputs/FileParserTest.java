@@ -35,12 +35,14 @@ public class FileParserTest extends TestCase {
         String expected = "Table:2{TableName:FACULTYNativeFields:11|6RelatedTables:13RelatedFields:0|0}";
         assertEquals("First Table Should be named student", actual.replaceAll("\\s+", ""), expected);
     }
+
     @Test
     public void testCoursesTable() {
         String actual = database.getTables()[2].toString();
         String expected = "Table:13{TableName:COURSESNativeFields:3|5RelatedTables:2RelatedFields:0|0}";
         assertEquals("First Table Should be named student", actual.replaceAll("\\s+", ""), expected);
     }
+
     @Test
     public void testFieldNames() throws Exception {
         Field[] fields = database.getFields();
@@ -53,12 +55,4 @@ public class FileParserTest extends TestCase {
         assertEquals("Sixth Field", fields[5].toString(), "8|StudentName|1|0|0|0|1|false|false|");
         assertEquals("Seventh Field", fields[6].toString(), "11|FacultyName|2|0|0|0|1|false|false|");
     }
-
-
-//    @Test
-//    public void testParseSaveFile() throws Exception { // TODO saveFile is completely broken.
-////        FileParser parser = new FileParser(new File("Courses.edg"));
-////        parser.parseSaveFile();
-////        assertEquals("Should properly open Courses file", parser.getEdgeFields().length, 7);
-//    }
 }
