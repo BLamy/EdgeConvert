@@ -1,15 +1,14 @@
-package group1;
+package group1.Outputs;
 
 import group1.model.Field;
 import group1.model.Table;
 import junit.framework.TestCase;
 import org.junit.Test;
-import org.mockito.*;
 
 /**
  * Created by brett on 9/30/16.
  */
-public class CreateDDLMySQLTest extends TestCase {
+public class MySQLTest extends TestCase {
     // Field Types
     private final int VARCHAR = 0;
     private final int BOOL = 1;
@@ -91,20 +90,14 @@ public class CreateDDLMySQLTest extends TestCase {
         Field message = new Field("8|message");
         message.setTableID(1);
         message.setDisallowNull(true);
-        message.setDefaultValue("Sent from EdgeConnector");
+        message.setDefaultValue("Sent from Connector");
         message.setVarcharValue(255);
         message.setDataType(VARCHAR);
 
-        CreateDDLMySQL spy = Mockito.spy(new CreateDDLMySQL(
-                new Table[] { usersTable, messagesTable },
-                new Field[] {
-                        userId, isVerified, canSendMessages, username, password,
-                        messageId, toUser, fromUser, message
-                }
-        ));
-
-        Mockito.doReturn("MySQLDB").when(spy).generateDatabaseName();
-
+        String dbName = "MySQLDB";
+        Table[] tables = new Table[] { usersTable, messagesTable };
+        Field[] fields = new Field[] { userId, isVerified, canSendMessages, username, password, messageId, toUser, fromUser, message };
+        String actual = MySQL.convert(dbName, tables, fields).replaceAll("\\s","");
 
         String expected = (
             "        CREATE DATABASE MySQLDB;\n" +
@@ -126,7 +119,6 @@ public class CreateDDLMySQLTest extends TestCase {
             "        );"
             ).replaceAll("\\s","");
 
-        String actual = spy.getSQLString().replaceAll("\\s","");
         assertEquals("", actual, expected);
     }
 

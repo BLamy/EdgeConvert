@@ -9,9 +9,40 @@ import group1.model.Table;
 
 import java.util.ArrayList;
 
-public class EdgeCollections {
+/**
+ * A bunch of methods for doing things with collections.
+ * Pretty much every function in here is probably better written using some kind of Higher Order Function but this is java.
+ */
+public class Collections {
+    public static int calcFieldIndex(int endPoint1, int endPoint2, Field[] fields) {
+        int fieldIndex = -1;
+        for (int fIndex = 0; fIndex < fields.length; fIndex++) { //search fields array for endpoints
+            if (endPoint1 == fields[fIndex].getNumFigure() || endPoint2 == fields[fIndex].getNumFigure()) { //found endPoint1 in fields array
+                fieldIndex = fIndex; //identify which element of the fields array that endPoint1 was found in
+            }
+        }
+        return fieldIndex;
+    }
+
+    public static int calcTableIndex(int table1Index, int endPoint, Table[] tables) {
+        for (int tIndex = 0; tIndex < tables.length; tIndex++) { //search tables array for endpoints
+            if (endPoint == tables[tIndex].getNumFigure()) { //found endPoint1 in tables array
+                table1Index = tIndex; //identify which element of the tables array that endPoint1 was found in
+            }
+        }
+        return table1Index;
+    }
+
+    public static boolean isTableDup(String testTableName, ArrayList<Table> otherTables) {
+        for (Table table : otherTables) {
+            if (table.getName().equals(testTableName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Table findTableByNumFig(Table[] tables, int numFigure) {
-        // TODO replace with find Higher order function?
         for (Table table : tables) {
             if (numFigure == table.getNumFigure()) {
                 return table;
@@ -26,7 +57,6 @@ public class EdgeCollections {
     }
 
     public static Field findFieldByNumFig(Field[] fields, int numFigure) {
-        // TODO replace with find Higher order function?
         for (Field field : fields) {
             if (numFigure == field.getNumFigure()) {
                 return field;

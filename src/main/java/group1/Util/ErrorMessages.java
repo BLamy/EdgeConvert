@@ -5,11 +5,11 @@ package group1.Util;
  */
 public class ErrorMessages {
     public static String containsRelationships(String fileName) {
-        return "The Edge Diagrammer file\n" + fileName + "\ncontains relations.  Please resolve them and try again.";
+        return "The EdgeStrategy Diagrammer file\n" + fileName + "\ncontains relations.  Please resolve them and try again.";
     }
 
     public static String containsCompositeAttributes(String fileName) {
-        return"The Edge Diagrammer file\n" + fileName + "\ncontains composite attributes. Please resolve them and try again.";
+        return"The EdgeStrategy Diagrammer file\n" + fileName + "\ncontains composite attributes. Please resolve them and try again.";
     }
 
     public static String entityOrAttributeNameBlank() {

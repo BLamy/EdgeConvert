@@ -1,7 +1,6 @@
 package group1.model;
 
-import group1.EdgeConvertFileParser;
-import group1.model.Field;
+import group1.Util.Constants;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -49,15 +48,15 @@ public class FieldTest extends TestCase {
         field.setVarcharValue(4);
         field.setDataType(1);
         assertEquals(field.toString(),
-                field.getNumFigure() + EdgeConvertFileParser.DELIM +
-                field.getName() + EdgeConvertFileParser.DELIM +
-                field.getTableID() + EdgeConvertFileParser.DELIM +
-                field.getTableBound() + EdgeConvertFileParser.DELIM +
-                field.getFieldBound() + EdgeConvertFileParser.DELIM +
-                field.getDataType() + EdgeConvertFileParser.DELIM +
-                field.getVarcharValue() + EdgeConvertFileParser.DELIM +
-                field.getIsPrimaryKey() + EdgeConvertFileParser.DELIM +
-                field.getDisallowNull() + EdgeConvertFileParser.DELIM +
+                field.getNumFigure() + Constants.DELIM +
+                field.getName() + Constants.DELIM +
+                field.getTableID() + Constants.DELIM +
+                field.getTableBound() + Constants.DELIM +
+                field.getFieldBound() + Constants.DELIM +
+                field.getDataType() + Constants.DELIM +
+                field.getVarcharValue() + Constants.DELIM +
+                field.getIsPrimaryKey() + Constants.DELIM +
+                field.getDisallowNull() + Constants.DELIM +
                 field.getDefaultValue()
         );
 

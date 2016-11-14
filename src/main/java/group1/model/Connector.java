@@ -1,14 +1,16 @@
-package group1;
+package group1.model;
+
+import group1.Util.Constants;
 
 import java.util.StringTokenizer;
 
-public class EdgeConnector {
+public class Connector {
    private int numConnector, endPoint1, endPoint2;
    private String endStyle1, endStyle2;
    private boolean isEP1Field, isEP2Field, isEP1Table, isEP2Table;
 
-   public EdgeConnector(String inputString) {
-      StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
+   public Connector(String inputString) {
+      StringTokenizer st = new StringTokenizer(inputString, Constants.DELIM);
       numConnector = Integer.parseInt(st.nextToken());
       endPoint1 = Integer.parseInt(st.nextToken());
       endPoint2 = Integer.parseInt(st.nextToken());

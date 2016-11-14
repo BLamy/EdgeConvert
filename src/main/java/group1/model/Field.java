@@ -1,6 +1,6 @@
 package group1.model;
 
-import group1.EdgeConvertFileParser;
+import group1.Util.Constants;
 
 import java.util.StringTokenizer;
 
@@ -12,7 +12,7 @@ public class Field {
    public static final int VARCHAR_DEFAULT_LENGTH = 1;
 
    public Field(String inputString) {
-      StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
+      StringTokenizer st = new StringTokenizer(inputString, Constants.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
       tableID = 0;
@@ -105,7 +105,7 @@ public class Field {
    }
 
    public String toString() {
-      return String.join(EdgeConvertFileParser.DELIM, new String[]{
+      return String.join(Constants.DELIM, new String[]{
          numFigure+"", name, tableID+"", tableBound+"", fieldBound+"",
          dataType+"", varcharValue+"", isPrimaryKey+"", disallowNull+"",
          defaultValue

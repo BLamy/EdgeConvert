@@ -1,16 +1,17 @@
-package group1;
+package group1.model;
 
+import group1.model.Connector;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
 
-public class EdgeConnectorTest extends TestCase {
-        EdgeConnector testObj;
+public class ConnectorTest extends TestCase {
+        Connector testObj;
 
 	@Before
 	public void setUp() throws Exception {
-            testObj = new EdgeConnector("1|2|3|testStyle1|testStyle2");
+            testObj = new Connector("1|2|3|testStyle1|testStyle2");
 	}
 
 
