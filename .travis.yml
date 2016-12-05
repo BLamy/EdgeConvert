@@ -9,5 +9,5 @@ deploy:
   file: target/EdgeConvert-jar-with-dependencies.jar
   skip_cleanup: true
   on:
-    repo: blamy/EdgeConvert
+    repo: BLamy/EdgeConvert
     tags: true
