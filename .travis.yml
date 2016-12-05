@@ -5,7 +5,7 @@ jdk:
 deploy:
   provider: releases
   api_key:
-    secure: 3e5e3813ca8d61afc315c4e69b29cc903371e925
+    secure: daa1b8210258a46cd6ac5ede60f48cf7521144d3
   file: target/EdgeConvert-jar-with-dependencies.jar
   skip_cleanup: true
   on:
